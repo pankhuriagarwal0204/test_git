@@ -20,7 +20,7 @@ function commitcurrentcode() {
    git add . && \
    git add -u && \
    git commit -m "${message}"
-   git push origin HEAD | sed "s/\(https:\/\/\)\(.*\)$/\1${username}:${password}@\2/" 
+   git push origin master | sed "s/\(https:\/\/\)\(.*\)$/\1${username}:${password}@\2/" 
 }
 
 function rawurlencode() {
