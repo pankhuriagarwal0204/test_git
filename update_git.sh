@@ -44,12 +44,12 @@ function getcredentials() {
     echo -n "Enter github username:"
     read u
     echo -n "Enter commit message:"
-    read msg
+    read -r msg
     echo -n "Enter github password:"
     read -s p
     username=$(rawurlencode $u)
     password=$(rawurlencode $p)
-    message=$(rawurlencode $msg)
+    message=$msg
     echo
 }
 
