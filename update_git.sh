@@ -1,15 +1,9 @@
 #!/bin/bash
 CWD=$(pwd)
 
-function parse_git_branch() {
-    $branch=git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
-    echo $branch
-}
-
 function pullupdatedcode() {
    cd $CWD
    git pull origin master 
-#| sed "s/\(https:\/\/\)\(.*\)$/\1${username}:${password}@\2/" 
    if [ $? -ne 0 ] ; then
         echo "Unable to pull repo";
         exit 1;
@@ -21,7 +15,15 @@ function commitcurrentcode() {
    git add . && \
    git add -u && \
    git commit -m "${message}"
-   git push origin master | sed "s/\(https:\/\/\)\(.*\)$/\1${username}:${password}@\2/" 
+}
+
+function pushcommitedcode() {
+   cd $CWD
+   git push origin master
+   if [ $? -ne 0 ] ; then
+        echo "Unable to push repo";
+        exit 1;
+    fi
 }
 
 function rawurlencode() {
@@ -41,20 +43,15 @@ function rawurlencode() {
   echo "${encoded}" 
 }
 
-function getcredentials() {
-    local u p msg
-    #echo -n "Enter github username:"
-    #read u
+function getcommitmessage() {
+    local msg
     echo -n "Enter commit message:"
     read -r msg
-    #echo -n "Enter github password:"
-    #read -s p
-    #username=$(rawurlencode $u)
-    #password=$(rawurlencode $p)
     message=$msg
     echo
 }
 
-getcredentials
+getcommitmessage
 pullupdatedcode
 commitcurrentcode
+pushcommitedcode
