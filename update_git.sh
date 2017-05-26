@@ -43,13 +43,13 @@ function getcredentials() {
     local u p msg
     echo -n "Enter github username:"
     read u
+    echo -n "Enter commit message:"
+    read msg
     echo -n "Enter github password:"
     read -s p
-    echo -n "Enter commit message:"
-    read -s msg
     username=$(rawurlencode $u)
     password=$(rawurlencode $p)
-    message=$(rawurlencode $msg)
+    message=$msg
     echo
 }
 
