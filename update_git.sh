@@ -49,7 +49,7 @@ function getcredentials() {
     read -s p
     username=$(rawurlencode $u)
     password=$(rawurlencode $p)
-    message=$msg
+    message=$(rawurlencode $msg)
     echo
 }
 
