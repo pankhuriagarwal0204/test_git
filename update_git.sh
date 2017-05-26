@@ -20,6 +20,7 @@ function commitcurrentcode() {
    git add . && \
    git add -u && \
    git commit -m "${message}"
+   git push origin HEAD
 }
 
 function rawurlencode() {
