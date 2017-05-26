@@ -8,7 +8,8 @@ function parse_git_branch() {
 
 function pullupdatedcode() {
    cd $CWD
-   git pull origin master | sed "s/\(https:\/\/\)\(.*\)$/\1${username}:${password}@\2/" 
+   git pull origin master 
+#| sed "s/\(https:\/\/\)\(.*\)$/\1${username}:${password}@\2/" 
    if [ $? -ne 0 ] ; then
         echo "Unable to pull repo";
         exit 1;
@@ -42,14 +43,14 @@ function rawurlencode() {
 
 function getcredentials() {
     local u p msg
-    echo -n "Enter github username:"
-    read u
+    #echo -n "Enter github username:"
+    #read u
     echo -n "Enter commit message:"
     read -r msg
-    echo -n "Enter github password:"
-    read -s p
-    username=$(rawurlencode $u)
-    password=$(rawurlencode $p)
+    #echo -n "Enter github password:"
+    #read -s p
+    #username=$(rawurlencode $u)
+    #password=$(rawurlencode $p)
     message=$msg
     echo
 }
